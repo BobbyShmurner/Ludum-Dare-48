@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
-    [SerializeField] private float movementSpeed = 8;
-    [SerializeField] private float primaryCooldownTimer = 0.2f;
-
-    public GameObject bullet;
-
     PlayerInput input;
 
     Vector2 movement;
     Vector2 mousePos;
 
     bool primaryPressed = false;
-    float primaryCooldown = 0.0f;
 
     Camera mainCam;
+    Rigidbody2D rb;
 
     private void Awake()
     {
@@ -38,39 +33,29 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
+        rb = GetComponent<Rigidbody2D>();
+
+        color = GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()
     {
+        if (primaryPressed) {
+            Vector3 mouseInWorld = mainCam.ScreenToWorldPoint(mousePos);
+            mouseInWorld.z = 0;
+
+            Shoot(mouseInWorld, BulletController.BulletType.Player);
+        }
+    }
+
+    private void FixedUpdate()
+    {
         Move();
-        Shoot();
     }
 
     void Move()
     {
-        transform.position += new Vector3(movement.x, movement.y, 0) * movementSpeed * Time.deltaTime;
-    }
-
-    void Shoot()
-    {
-        if (primaryCooldown > 0)
-        {
-            primaryCooldown -= Time.deltaTime;
-            return;
-        }
-
-        if (!primaryPressed) { return; }
-        GameObject bulletObj = Instantiate(bullet);
-        bulletObj.transform.position = transform.position;
-
-        Vector3 mouseInWorld = mainCam.ScreenToWorldPoint(mousePos);
-        mouseInWorld.z = 0;
-
-        Vector3 dir = mouseInWorld - transform.position;
-
-        bulletObj.transform.up = dir;
-
-        primaryCooldown = primaryCooldownTimer;
+        rb.MovePosition(rb.position + movement * movementSpeed);
     }
 
     void EnableControls(bool enabled)
