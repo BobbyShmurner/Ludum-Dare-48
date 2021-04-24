@@ -1,5 +1,5 @@
 {
-    "name": "Imput",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Movement",
@@ -69,6 +69,79 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Attacks",
+            "id": "e1f1e719-91cd-494f-b7ee-7b1cd301320a",
+            "actions": [
+                {
+                    "name": "Primary",
+                    "type": "Value",
+                    "id": "24cfeb02-27cf-4f05-8299-7782fdb05418",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0288bee6-5f02-470f-94cf-e3e28622ed54",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Mouse",
+            "id": "6271710b-539b-4136-b3d4-a56df3479bfd",
+            "actions": [
+                {
+                    "name": "Pos",
+                    "type": "PassThrough",
+                    "id": "4805853d-e8eb-4645-a0b9-c7497d3ef351",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Delta",
+                    "type": "PassThrough",
+                    "id": "441b1299-1447-4844-a0be-1328a5e36f78",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "70bc97f6-272f-42cb-a02c-883f6c8d766d",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Pos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4d7215b-8b0f-4074-9d78-5d56a4e9e5d8",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Delta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
